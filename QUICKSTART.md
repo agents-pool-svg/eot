@@ -41,20 +41,38 @@ EOF
 
 ### 安装 / 构建
 
-```bash
-# 本地构建
-git clone <repo> && cd test0project
-go build -o bin/eot ./cmd/eot
-./bin/eot version    # 输出: eot 0.1.0
+推荐按顺序由易到难尝试：
 
-# 或直接 install 到 $GOBIN
+```bash
+# 方式 A（最快）：直接从 GitHub 安装到 $GOBIN，一行搞定
 go install github.com/agents-pool-svg/eot/cmd/eot@latest
+
+# 确保 $GOBIN 在 PATH 里（一次性）
+grep -q 'go/bin' ~/.zshrc || echo 'export PATH="$HOME/go/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+
+eot version        # 输出: eot 0.1.0
 ```
+
+```bash
+# 方式 B：克隆仓库后本地构建（想改代码时用）
+git clone https://github.com/agents-pool-svg/eot.git
+cd eot
+go build -o bin/eot ./cmd/eot
+./bin/eot version
+```
+
+```bash
+# 方式 C：下载预编译二进制（如有 Release 时）
+# 见 https://github.com/agents-pool-svg/eot/releases
+```
+
+> 之后的示例统一用 `eot` 命令；如果你用方式 B 且没安装到 PATH，把 `eot` 换成 `./bin/eot` 即可。
 
 ### 第一条命令（30 秒见效果）
 
 ```bash
-./bin/eot run \
+eot run \
   -q "17 * 23 = ?" \
   --topo debate \
   --agent "Drafter:You compute the product step by step." \
