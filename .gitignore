@@ -1,0 +1,16 @@
+# Local dev artifacts
+bin/
+.env
+.env.*
+*.local
+
+# Go
+*.test
+*.out
+coverage.*
+/vendor/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
